@@ -1,20 +1,10 @@
 import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   selector: 'my-app',
-	template: `
-  <div class="jumbotron">
-    <h1>{{title}}</h1>
-  </div>
-  `
+	template: `<router-outlet></router-outlet>`,
+  directives: [ROUTER_DIRECTIVES]
 })
 
-// export class Plan {
-//   id: number;
-//   name: string;
-//   notes: string;
-// }
-
-export class AppComponent {
-  title = 'Landing Page';
-}
+export class AppComponent { }
