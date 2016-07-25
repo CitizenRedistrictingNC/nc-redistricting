@@ -7,7 +7,6 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   <h1>{{title}}</h1>
 
   <ul>
-    <li><a routerLink="/" routerLinkActivated="active">Home</a></li>
     <li><a routerLink="/design" routerLinkActivated="active">Design</a></li>
     <li><a routerLink="/personal-rankings" routerLinkActivated="active">Personal Rankings</a></li>
     <li><a routerLink="/rankings" routerLinkActivated="active">Rankings</a></li>
