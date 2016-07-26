@@ -17,9 +17,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     </nav>
 
     <div class="container">
-      <div class="row starter-row">
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   `,
   directives: [ROUTER_DIRECTIVES]
