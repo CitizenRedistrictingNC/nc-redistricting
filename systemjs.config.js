@@ -5,6 +5,7 @@
     '@angular':                   'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'moment':                     'node_modules/moment/moment.js',
+    'leaflet':                    'node_modules/leaflet/dist/leaflet.js',
     'rxjs':                       'node_modules/rxjs'
   };
 
