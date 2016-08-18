@@ -7,7 +7,8 @@
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "typings": "typings"
+    "typings": "typings",
+    "bundle": "rm -rf bundle && npm run tsc && mkdir bundle && cp -R dist node_modules index.html systemjs.config.js styles.css bundle"
   },
   "license": "ISC",
   "dependencies": {
