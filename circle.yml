@@ -1,0 +1,9 @@
+machine:
+  node:
+    version: 5.7.0
+deployment:
+  staging:
+    branch: master
+    commands:
+      - npm run bundle
+      - aws s3 sync bundle s3://redistricting.a.willowdesk.info --delete
