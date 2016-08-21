@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   selector: 'my-app',
@@ -7,7 +6,11 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     <div class="row starter-row">
       <h1>About</h1>
 
-      Amet adipisicing saepe atque explicabo possimus rerum! Quaerat ab quas magni dolorem quaerat? Mollitia odio tempora quisquam architecto similique. A dolore omnis velit cum sint temporibus dicta iusto. Amet qui?
+      <p>
+        The Citizen Redistricting Project lets citizens submit their own redistricting
+        plans for North Carolina State Legislature districts.
+      </p>
+
 
       <ul>
         <li>
@@ -30,8 +33,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
         <li><a routerLink="/rankings" routerLinkActivated="active">Rankings</a></li>
       </ul>
     </div>
-  `,
-  directives: [ROUTER_DIRECTIVES]
+  `
 })
 
 export class HomeComponent { }

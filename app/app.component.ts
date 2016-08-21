@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   selector: 'my-app',
@@ -10,8 +9,11 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
           <a class="navbar-brand" routerLink="/" routerLinkActivated="active">Citizen Redistricting NC</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-          </ul>
+          <div class="navbar-text navbar-right">
+            <a routerLink="login" routerLinkActivated="true">
+              <button id="loginButton" class="btn btn-default btn-primary btn-xs">Login</button>
+            </a>
+          </div>
         </div>
       </div>
     </nav>
@@ -19,8 +21,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     <div class="container">
       <router-outlet></router-outlet>
     </div>
-  `,
-  directives: [ROUTER_DIRECTIVES]
+  `
 })
 
 export class AppComponent { }
