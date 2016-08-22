@@ -1,31 +1,38 @@
-# Testme
+# Summary
+A public redistricting platform for North Carolina.
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.10.
+Click to see a demo of the [master branch](http://redistricting.a.willowdesk.info).
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Overview
 
-## Code scaffolding
+The platform would provide citizens a way to contribute new district plans:
+ * A user registration process. Registered users can add/modify new redistricting plans.
+ * Users could pick 13 regions (anchors), and the platform would generate a set of districts for North Carolina. This is based on [A RASTER-BASED NETWORK ANALYST GIS APPROACH TO REDISTRICTING IN NORTH CAROLINA](http://www.url.com).
+ * The application would score every submitted redistricting plan based on the criteria laid out in [S1093](http://www.ncga.state.nc.us/gascripts/BillLookUp/BillLookUp.pl?Session=2007&BillID=s1093&submitButton=Go).
+ * The application would show a roster of top scoring redistricting plans, with possibly some relevant statistical information about the map, its score, and how the score is computed.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/route/class`.
+Screens:
+ * Welcome: The main landing page for the application. Provides a summary
+   of the service, and links to register, login, and view the rankings.
+ * Login: A series of prompts to let the user login, or reset their password.
+ * New user: A form to initiate a plain email registration or OAuth
+   (gmail/facebook, eg)
+ * Rankings: Listing of top ranked redistricting plans.
+ * Personal Rankings: Listing of a specific user's plans and their scores.
+ * New Redistricting: A map of NC, and ability to modify up to 13 anchor points
+   and submit the anchor points to generate a new redistricting map.
+ * District Score: A detailed view of a redistricting map, and its score.
 
-## Build
+# Development
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+This app is a 'frontend only', and is fairly easy to setup. You must install
+[node](http://nodejs.org) before you get started. Once node is installed open a
+terminal in this project and type:
 
-## Running unit tests
+```bash
+# install project dependencies.
+npm install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to Github Pages
-
-Run `ng github-pages:deploy` to deploy to Github Pages.
-
-## Further help
-
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# run a dev server in watch mode on http://localhost:3000
+npm start
+```
