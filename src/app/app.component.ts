@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {
+  AngularFire,
+  AuthProviders
+} from 'angularfire2';
 
 @Component({
   moduleId: module.id,
@@ -11,9 +15,10 @@ import { Component } from '@angular/core';
         </div>
         <div class="collapse navbar-collapse">
           <div class="navbar-text navbar-right">
-            <a routerLink="login" routerLinkActivated="true">
-              <button id="loginButton" class="btn btn-default btn-primary btn-xs">Login</button>
-            </a>
+            <span [class.hidden]="!username">
+              {{ username }} (<a (click)="logout()">Logout</a>)
+            </span>
+            <button [class.hidden]="username" class="btn btn-default btn-primary btn-xs" (click)="login()">Login</button>
           </div>
         </div>
       </div>
@@ -25,4 +30,32 @@ import { Component } from '@angular/core';
   `
 })
 
-export class AppComponent { }
+export class AppComponent {
+  username: string;
+
+  constructor(public af: AngularFire) {
+    this.af.auth.subscribe(response => {
+      if (!response) {
+        return;
+      }
+      console.log("|new respons = ");
+      console.log(response);
+      switch (response.provider) {
+        case AuthProviders.Google:
+          this.username = response.google.displayName;
+          break;
+        default:
+          this.username = null;
+      }
+    });
+  }
+
+  login() {
+    this.af.auth.login();
+  }
+
+  logout() {
+    this.af.auth.logout();
+    this.username = null;
+  }
+}

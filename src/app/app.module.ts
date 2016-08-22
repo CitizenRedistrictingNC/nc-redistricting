@@ -3,7 +3,11 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { AppComponent  } from './app.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-import { AngularFireModule } from 'angularfire2';
+import {
+  AngularFireModule,
+  AuthMethods,
+  AuthProviders
+} from 'angularfire2';
 
 var firebaseConfig = {
   apiKey: "AIzaSyAdd3xy0z4sPwgiTUIYfoJ5KzpcHVWAjIE",
@@ -12,10 +16,15 @@ var firebaseConfig = {
   storageBucket: "nc-citizenredistrict.appspot.com",
 };
 
+const firebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Popup
+};
+
 @NgModule({
   declarations: [ AppComponent ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     RouterModule,
     RouterModule.forRoot(routes)
