@@ -19,7 +19,9 @@ module.exports = function(defaults) {
       'angularfire2/**/*.js',
       'firebase/*.js',
       'bootstrap/dist/css/bootstrap.min.css',
-      'ng2-bootstrap/**/*.js'
+      'ng2-bootstrap/**/*.js',
+      'd3/d3.js',
+      'topojson/build/topojson.js'
     ]
   });
 };

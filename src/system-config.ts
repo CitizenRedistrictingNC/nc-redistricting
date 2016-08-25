@@ -9,9 +9,11 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'firebase': 'vendor/firebase/firebase.js',
   'angularfire2': 'vendor/angularfire2',
-  'ng2-bootstrap': 'vendor/ng2-bootstrap'
+  'd3': 'vendor/d3/d3.js',
+  'firebase': 'vendor/firebase/firebase.js',
+  'ng2-bootstrap': 'vendor/ng2-bootstrap',
+  'topojson': 'vendor/topojson/build/topojson.js'
 };
 
 /** User packages configuration. */

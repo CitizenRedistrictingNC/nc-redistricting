@@ -1,0 +1,14 @@
+.county {
+  fill: #fff;
+  stroke: #333;
+}
+
+.counties {
+  fill: #fff;
+  stroke: #777;
+}
+
+svg {
+  stroke: black;
+  stroke-width: 1;
+}

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { Map, TileLayer, LatLng } from 'leaflet';
+import * as d3 from 'd3';
+import * as topojson from 'topojson';
 
 @Component({
   selector: 'app-root',
+  // TODO the styles defined in the component aren't taking, I just stuck a copy
+  // in index.css for the moment.
+  styleUrls: [ 'app/design.component.css' ],
 	template: `
     <div class="row starter-row">
       <div id="design-map"></div>
@@ -12,10 +16,7 @@ import { Map, TileLayer, LatLng } from 'leaflet';
         <div class="form-group">
           <label for="instructions">Instructions</label>
           <div class="controls">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-            vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            Pick 13 points on the map above by clicking.
           </div>
         </div>
         <div class="form-group">
@@ -41,18 +42,43 @@ import { Map, TileLayer, LatLng } from 'leaflet';
 })
 
 export class DesignComponent {
-  map: Map;
-
   ngOnInit() {
-    // let layer = new TileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    //   attribution: '&copy <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
-    // });
-    // this.map = new Map('design-map', {
-    //   zoomControl: false,
-    //   dragging: false,
-    //   center: new LatLng(34.86, -82.78),
-    //   zoom: 6,
-    //   layers: [layer]
-    // });
+    // TODO get width, monitor screen width changes
+    const width = document.getElementById('design-map').offsetWidth;
+    const height = 400;
+    let svg = d3.select('#design-map')
+      .append('svg')
+      .attr('width',width)
+      .attr('height',height);
+
+    let projection = d3.geo.albers()
+      .scale(7500)
+      .center([0,0])
+      .rotate([79.9,-35.2,-1])
+      .translate([width / 2, height / 2]);
+
+    let path = d3.geo.path()
+      .projection(projection);
+
+    svg.append('rect')
+      .attr('class','map-background')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', width)
+      .attr('height', height);
+
+    d3.json("/boundaries.topojson", (err, nc) => {
+      if (err) { return console.log(err); }
+
+      let boundaries = topojson.feature(nc, nc.objects.nc);
+
+      svg.append('g')
+          .attr('class','counties')
+        .selectAll('path')
+          .data(boundaries.features)
+        .enter().append('path')
+          .attr('class', 'county')
+          .attr('d', path);
+    })
   }
 }
