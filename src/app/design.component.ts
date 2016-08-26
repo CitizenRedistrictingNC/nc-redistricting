@@ -51,6 +51,7 @@ export class DesignComponent {
       .attr('width',width)
       .attr('height',height);
 
+    // TODO scale depends on window width
     let projection = d3.geo.albers()
       .scale(7500)
       .center([0,0])
@@ -78,7 +79,13 @@ export class DesignComponent {
           .data(boundaries.features)
         .enter().append('path')
           .attr('class', 'county')
-          .attr('d', path);
+          .attr('d', path)
+          .on('click', () => {
+            console.log("|click");
+          });
+
+      // TODO Add a click listener - when a click is detected, make a point on
+      // the map, and generate a voronoi diagram for it.
     })
   }
 }
