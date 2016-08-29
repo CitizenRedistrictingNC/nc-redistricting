@@ -1,0 +1,14 @@
+{
+  "user-data": {
+    "Svul7jNsRJYgLSzHyw0CpGRpjK43": {
+      "designs": {
+        "1": true
+      }
+    }
+  },
+  "designs": {
+    "1": {
+      "akey": "aval"
+    }
+  }
+}

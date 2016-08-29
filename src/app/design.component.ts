@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import {
+  AngularFire,
+  AngularFireAuth,
+  FirebaseListObservable,
+  FirebaseObjectObservable
+} from 'angularfire2';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
@@ -7,41 +13,26 @@ import * as topojson from 'topojson';
   // TODO the styles defined in the component aren't taking, I just stuck a copy
   // in index.css for the moment.
   styleUrls: [ 'app/design.component.css' ],
-	template: `
-    <div class="row starter-row">
-      <div id="design-map"></div>
-    </div>
-    <div class="row">
-      <form>
-        <div class="form-group">
-          <label for="instructions">Instructions</label>
-          <div class="controls">
-            Pick 13 points on the map above by clicking.
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <div class="controls">
-            <input type="text" id="name" class="form-control" placeholder="description">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="notes">Notes</label>
-          <div class="controls">
-            <textarea id="notes" class="form-control" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="controls">
-            <button id="generate" class="btn btn-default">Generate Districts</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  `
+	templateUrl: 'app/design.component.html'
 })
 
 export class DesignComponent {
+  user: FirebaseListObservable<any>;
+  designs: FirebaseListObservable<any>;
+  uid: string;
+
+  error: string;
+
+  constructor(af: AngularFire) {
+    af.auth.subscribe(auth => {
+      if (!auth) return;
+
+      this.uid = auth.uid;
+      this.user = af.database.list('/user-data/'+ auth.uid +'/designs');
+      this.designs = af.database.list('/designs');
+    });
+  }
+
   ngOnInit() {
     // TODO get width, monitor screen width changes
     const width = document.getElementById('design-map').offsetWidth;
@@ -87,5 +78,24 @@ export class DesignComponent {
       // TODO Add a click listener - when a click is detected, make a point on
       // the map, and generate a voronoi diagram for it.
     })
+  }
+
+  save(name: string, notes:string) {
+    let new_key = this.designs.push({
+      uid: this.uid,
+      name,
+      notes
+    });
+
+    new_key.then(id => {
+        let pushed = {};
+        pushed[new_key.key] = true;
+        this.user.push(pushed)
+          .then(_ => console.log("Added new design to user profile"))
+          .catch(err => this.error = err);
+      })
+      .catch(err => this.error = err);
+
+    return false;
   }
 }

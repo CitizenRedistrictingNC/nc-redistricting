@@ -19,7 +19,7 @@
     "@angular/platform-browser": "2.0.0-rc.5",
     "@angular/platform-browser-dynamic": "2.0.0-rc.5",
     "@angular/router": "3.0.0-rc.1",
-    "angularfire2": "^2.0.0-beta.3-pre2",
+    "angularfire2": "^2.0.0-beta.4",
     "bootstrap": "^3.3.7",
     "d3": "^3.5.12",
     "es6-shim": "0.35.1",

@@ -38,8 +38,6 @@ export class AppComponent {
       if (!response) {
         return;
       }
-      console.log("|new respons = ");
-      console.log(response);
       switch (response.provider) {
         case AuthProviders.Google:
           this.username = response.google.displayName;
