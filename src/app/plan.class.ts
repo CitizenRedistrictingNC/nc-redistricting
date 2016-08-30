@@ -1,5 +1,7 @@
 export class Plan {
-  id: number;
-  name: string;
-  notes: string;
+  constructor(
+    public id: number,
+    public name: string,
+    public notes: string
+  ) {}
 }

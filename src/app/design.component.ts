@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  AngularFire,
-  AngularFireAuth,
-  FirebaseListObservable,
-  FirebaseObjectObservable
-} from 'angularfire2';
+import { Plan } from './plan.class';
+import { PlanService } from './plan.service';
+import { Router } from '@angular/router';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
 
@@ -17,26 +14,23 @@ import * as topojson from 'topojson';
 })
 
 export class DesignComponent {
-  user: FirebaseListObservable<any>;
-  designs: FirebaseListObservable<any>;
-  uid: string;
+  model = new Plan(1,'','');
+  error = null
 
-  error: string;
+  constructor(private planService: PlanService, private router: Router) { }
 
-  constructor(af: AngularFire) {
-    af.auth.subscribe(auth => {
-      if (!auth) return;
-
-      this.uid = auth.uid;
-      this.user = af.database.list('/user-data/'+ auth.uid +'/designs');
-      this.designs = af.database.list('/designs');
-    });
+  onSubmit() {
+    this.planService.submitPlan(this.model)
+      .then(_ => this.router.navigate(['personal-rankings']))
+      .catch(err => this.error = err);
   }
 
   ngOnInit() {
     // TODO get width, monitor screen width changes
     const width = document.getElementById('design-map').offsetWidth;
     const height = 400;
+
+    d3.select('#design-map > svg').remove();
     let svg = d3.select('#design-map')
       .append('svg')
       .attr('width',width)
@@ -78,24 +72,5 @@ export class DesignComponent {
       // TODO Add a click listener - when a click is detected, make a point on
       // the map, and generate a voronoi diagram for it.
     })
-  }
-
-  save(name: string, notes:string) {
-    let new_key = this.designs.push({
-      uid: this.uid,
-      name,
-      notes
-    });
-
-    new_key.then(id => {
-        let pushed = {};
-        pushed[new_key.key] = true;
-        this.user.push(pushed)
-          .then(_ => console.log("Added new design to user profile"))
-          .catch(err => this.error = err);
-      })
-      .catch(err => this.error = err);
-
-    return false;
   }
 }
