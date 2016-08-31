@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PlanService } from './plan.service';
 
 @Component({
   selector: 'app-root',
@@ -14,22 +15,10 @@ import { Component } from '@angular/core';
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>First Map</td>
-            <td class="text-right">3/16/2016</td>
-            <td class="text-right">6.2</td>
-            <td>...</td>
-          </tr>
-          <tr>
-            <td>Second Map</td>
+          <tr *ngFor="let plan of plans">
+            <td>{{ (plan | async)?.name }}</td>
             <td class="text-right">3/25/2016</td>
             <td class="text-right">6.9</td>
-            <td>...</td>
-          </tr>
-          <tr>
-            <td>Third map</td>
-            <td class="text-right">5/5/2016</td>
-            <td class="text-right">8.2</td>
             <td>...</td>
           </tr>
         </tbody>
@@ -38,4 +27,22 @@ import { Component } from '@angular/core';
   `
 })
 
-export class PersonalRankingsComponent { }
+export class PersonalRankingsComponent {
+  plans = [];
+
+  constructor(private planService: PlanService) {
+    planService.getUserPlans()
+      .then(v => {
+        // TODO when I delete something from firebase its content disappears,
+        // but the list itself doesn't - I guess I have to add a 'subscribe' to
+        // this element here and then remove myself from the list when I detect
+        // that I have been deleted.
+        v.subscribe(els => this.plans.push.apply(this.plans,els))
+      })
+      .catch(err => console.log(err))
+  }
+
+  ngOnInit() {
+    this.planService.getUserPlans()
+  }
+}
