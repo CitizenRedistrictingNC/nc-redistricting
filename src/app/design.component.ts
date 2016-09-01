@@ -26,40 +26,37 @@ export class DesignComponent {
   }
 
   ngOnInit() {
-    // TODO get width, monitor screen width changes
-    const width = document.getElementById('design-map').offsetWidth;
-    const height = 400;
+    const WIDTH = document.getElementById('design-map').offsetWidth;
 
     d3.select('#design-map > svg').remove();
-    let svg = d3.select('#design-map')
+    let g = d3.select('#design-map')
       .append('svg')
-      .attr('width',width)
-      .attr('height',height);
+      .attr('width',"100%")
+      .append('g');
 
-    // TODO scale depends on window width
     let projection = d3.geo.albers()
-      .scale(7500)
+      .scale(6000)
       .center([0,0])
-      .rotate([79.9,-35.2,-1])
-      .translate([width / 2, height / 2]);
+      .rotate([79.6,-34.5,-1]);
 
     let path = d3.geo.path()
       .projection(projection);
 
-    svg.append('rect')
-      .attr('class','map-background')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', width)
-      .attr('height', height);
+    let onSizeChange = () => {
+      const newWidth = document.getElementById('design-map').offsetWidth;
+      d3.select('svg > g').attr('transform', `scale(${ newWidth / 900 })`);
+      d3.select('svg').style('height', newWidth*0.4);
+    };
+
+    d3.select(window)
+      .on('resize', onSizeChange);
 
     d3.json("/boundaries.topojson", (err, nc) => {
       if (err) { return console.log(err); }
 
       let boundaries = topojson.feature(nc, nc.objects.nc);
 
-      svg.append('g')
-          .attr('class','counties')
+      g.attr('class','counties')
         .selectAll('path')
           .data(boundaries.features)
         .enter().append('path')
@@ -71,6 +68,8 @@ export class DesignComponent {
 
       // TODO Add a click listener - when a click is detected, make a point on
       // the map, and generate a voronoi diagram for it.
-    })
+    });
+
+    onSizeChange();
   }
 }
