@@ -3,6 +3,10 @@
   stroke: #bbb;
 }
 
+.seed {
+  r: 6px;
+}
+
 .map-background {
   fill: #eee;
 }

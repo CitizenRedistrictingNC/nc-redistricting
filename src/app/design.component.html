@@ -2,15 +2,18 @@
   <div id="design-map"></div>
 </div>
 <div class="row">
+  <div class="form-group">
+    <label for="instructions">Instructions</label>
+    <div class="controls">
+      To generate a new redistricting proposal, supply thirteen points on the map
+      above. The thirteen points will be used to generate a district map where each
+      district is centered on each point that you selected.
+    </div>
+  </div>
+
   <div class="alert alert-danger" role="alert" [hidden]="!error">{{ error }}</div>
 
   <form (ngSubmit)="onSubmit()" #form="ngForm">
-    <div class="form-group">
-      <label for="instructions">Instructions</label>
-      <div class="controls">
-        Pick 13 points on the map above by clicking.
-      </div>
-    </div>
     <div class="form-group">
       <label for="name">Name</label>
       <div class="controls">
@@ -26,7 +29,7 @@
     </div>
     <div class="form-group">
       <div class="controls">
-        <button type="submit" class="btn btn-default" [disabled]="!form.form.valid">Generate Districts</button>
+        <button type="submit" class="btn btn-default" [disabled]="!form.form.valid || error">Generate Districts</button>
       </div>
     </div>
   </form>
