@@ -79,6 +79,9 @@ export class DesignComponent {
           .attr('class', 'county')
           .attr('d', path)
           .on('click', (evt) => {
+            // TODO support clicking and dragging existing circles
+            if (this.model.seeds.length == 13) return;
+
             this.model.seeds.push(projection.invert(d3.mouse(seeds.node())));
             if (this.model.seeds.length < 13) {
               this.error = `Pick ${13 - this.model.seeds.length} more points on the map.`;

@@ -49,7 +49,9 @@ export class PlanService {
         let new_key = designs.push({
           uid,
           name: plan.name,
-          notes: plan.notes
+          notes: plan.notes,
+          seeds: plan.seeds
+          // created: this.af.database.ServerValue.TIMESTAMP
         });
 
         new_key.then(id => {
