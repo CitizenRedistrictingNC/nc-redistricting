@@ -33,11 +33,10 @@ export class PersonalRankingsComponent {
   constructor(private planService: PlanService) {
     planService.getUserPlans()
       .then(v => {
-        // TODO when I delete something from firebase its content disappears,
-        // but the list itself doesn't - I guess I have to add a 'subscribe' to
-        // this element here and then remove myself from the list when I detect
-        // that I have been deleted.
-        v.subscribe(els => this.plans.push.apply(this.plans,els))
+        v.subscribe(els => {
+          this.plans.splice(0, this.plans.length);
+          this.plans.push.apply(this.plans,els);
+        })
       })
       .catch(err => console.log(err))
   }
