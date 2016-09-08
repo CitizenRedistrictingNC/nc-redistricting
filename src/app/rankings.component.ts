@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PlanService } from './plan.service';
+import { FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -8,25 +10,17 @@ import { Component } from '@angular/core';
         <thead>
           <tr>
             <th>Name</th>
+            <th class="text-right">Date</th>
             <th class="text-right">Score</th>
             <th>Map</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Best Score</td>
-            <td class="text-right">9.5</td>
-            <td>...</td>
-          </tr>
-          <tr>
-            <td>Second Best</td>
-            <td class="text-right">9.0</td>
-            <td>...</td>
-          </tr>
-          <tr>
-            <td>Third Best Score</td>
-            <td class="text-right">6.5</td>
-            <td>...</td>
+          <tr *ngFor="let plan of plans | async">
+            <td>{{ plan.name }}</td>
+            <td class="text-right">{{ plan.created | date }}</td>
+            <td class="text-right"></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -35,5 +29,9 @@ import { Component } from '@angular/core';
 })
 
 export class RankingsComponent {
-  title = 'Rankings';
+  plans: FirebaseListObservable<any>;
+
+  constructor(private planService: PlanService) {
+    this.plans = planService.getTopPlans();
+  }
 }

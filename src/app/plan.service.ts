@@ -13,7 +13,15 @@ import {
 export class PlanService {
   constructor(private af: AngularFire) { }
 
-  getTopPlans(): void {}
+  getTopPlans(): FirebaseListObservable<any> {
+    // TODO this just fetchis 10 designs, since they're all unscored. When
+    // scored, fetch the highest scores.
+    return this.af.database.list('/designs', {
+      query: {
+        limitToLast: 10
+      }
+    });
+  }
 
   getUserPlans(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
