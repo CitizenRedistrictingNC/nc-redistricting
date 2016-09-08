@@ -11,7 +11,7 @@
 const map: any = {
   'angularfire2': 'vendor/angularfire2',
   'd3': 'vendor/d3/d3.js',
-  'firebase': 'vendor/firebase/firebase.js',
+  'firebase': 'vendor/firebase',
   'ng2-bootstrap': 'vendor/ng2-bootstrap',
   'topojson': 'vendor/topojson/build/topojson.js'
 };
@@ -21,6 +21,10 @@ const packages: any = {
   angularfire2: {
     defaultExtension: 'js',
     main: 'angularfire2.js'
+  },
+  firebase: {
+    defaultExtension: 'js',
+    main: 'firebase.js'
   },
   'ng2-bootstrap': {
     format: 'cjs',

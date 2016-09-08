@@ -17,9 +17,9 @@ import { PlanService } from './plan.service';
         <tbody>
           <tr *ngFor="let plan of plans">
             <td>{{ (plan | async)?.name }}</td>
-            <td class="text-right">3/25/2016</td>
-            <td class="text-right">6.9</td>
-            <td>...</td>
+            <td class="text-right">{{ (plan | async)?.created | date }}</td>
+            <td class="text-right"></td>
+            <td></td>
           </tr>
         </tbody>
       </table>

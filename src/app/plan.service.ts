@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operator/map';
 import { Plan } from './plan.class';
+import * as firebase from 'firebase';
 import {
   AngularFire,
   AngularFireAuth,
@@ -50,8 +51,8 @@ export class PlanService {
           uid,
           name: plan.name,
           notes: plan.notes,
-          seeds: plan.seeds
-          // created: this.af.database.ServerValue.TIMESTAMP
+          seeds: plan.seeds,
+          created: firebase.database.ServerValue.TIMESTAMP
         });
 
         new_key.then(id => {
