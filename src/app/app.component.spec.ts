@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { addProviders, async, inject } from '@angular/core/testing';
+// import { addProviders, async, inject } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { AngularFire } from 'angularfire2';
 
@@ -15,10 +15,10 @@ class MockAngularFire extends AngularFire {
 
 describe('App: Testme', () => {
   beforeEach(() => {
-    addProviders([
-      AppComponent,
-      { provide: AngularFire, useClass: MockAngularFire }
-    ]);
+    // addProviders([
+    //   AppComponent,
+    //   { provide: AngularFire, useClass: MockAngularFire }
+    // ]);
   });
 
   it('should create the app', () => {
