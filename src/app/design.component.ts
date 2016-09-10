@@ -62,16 +62,13 @@ export class DesignComponent {
       let maps = canvas.append('g').attr('class','counties');
       let seeds = canvas.append('g').attr('class','seeds');
 
-      let seedColor = d3.scale.category10();
-
       let updateSeeds = () => {
         seeds.selectAll('circle')
             .data(this.model.seeds)
           .enter().append('circle')
             .attr('class','seed')
             .attr('cx', (d) => projection(d)[0])
-            .attr('cy', (d) => projection(d)[1])
-            .attr('fill', (d) => seedColor(d.join(',')));
+            .attr('cy', (d) => projection(d)[1]);
       };
 
       maps.selectAll('path').data(boundaries.features)
