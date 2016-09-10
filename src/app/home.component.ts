@@ -28,9 +28,8 @@ import { Component } from '@angular/core';
 
       List of pages:
       <ul>
-        <li><a routerLink="/design" routerLinkActivated="active">Design</a></li>
         <li><a routerLink="/personal-rankings" routerLinkActivated="active">Personal Rankings</a></li>
-        <li><a routerLink="/rankings" routerLinkActivated="active">Rankings</a></li>
+        <li><a routerLink="/score" routerLinkActivated="active">Score</a></li>
       </ul>
     </div>
   `
