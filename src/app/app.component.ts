@@ -1,8 +1,5 @@
+import { AuthService } from './auth.service';
 import { Component } from '@angular/core';
-import {
-  AngularFire,
-  AuthProviders
-} from 'angularfire2';
 
 @Component({
   moduleId: module.id,
@@ -15,10 +12,10 @@ import {
         </div>
         <div class="collapse navbar-collapse">
           <div class="navbar-text navbar-right">
-            <span [class.hidden]="!username">
-              {{ username }} (<a (click)="logout()">Logout</a>)
+            <span [class.hidden]="!(as.username | async)">
+              {{ as.username | async }} (<a (click)="as.logout()">Logout</a>)
             </span>
-            <button [class.hidden]="username" class="btn btn-default btn-primary btn-xs" (click)="login()">Login</button>
+            <button [class.hidden]="(as.username | async)" class="btn btn-default btn-primary btn-xs" (click)="as.login()">Login</button>
           </div>
         </div>
       </div>
@@ -31,29 +28,5 @@ import {
 })
 
 export class AppComponent {
-  username: string;
-
-  constructor(public af: AngularFire) {
-    this.af.auth.subscribe(response => {
-      if (!response) {
-        return;
-      }
-      switch (response.provider) {
-        case AuthProviders.Google:
-          this.username = response.google.displayName;
-          break;
-        default:
-          this.username = null;
-      }
-    });
-  }
-
-  login() {
-    this.af.auth.login();
-  }
-
-  logout() {
-    this.af.auth.logout();
-    this.username = null;
-  }
+  constructor(public as: AuthService) { }
 }

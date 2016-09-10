@@ -1,4 +1,5 @@
 import { AppComponent  } from './app.component';
+import { AuthService } from './auth.service';
 import { BrowserModule  } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule  } from '@angular/core';
@@ -33,6 +34,6 @@ const firebaseAuthConfig = {
     RouterModule.forRoot(routes)
   ],
   bootstrap: [ AppComponent ],
-  providers: [ PlanService ]
+  providers: [ AuthService, PlanService ]
 })
 export class AppModule {}

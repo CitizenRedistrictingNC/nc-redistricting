@@ -13,6 +13,7 @@ const map: any = {
   'd3': 'vendor/d3/d3.js',
   'firebase': 'vendor/firebase',
   'ng2-bootstrap': 'vendor/ng2-bootstrap',
+  'rxjs': 'vendor/rxjs',
   'topojson': 'vendor/topojson/build/topojson.js'
 };
 
@@ -30,6 +31,9 @@ const packages: any = {
     format: 'cjs',
     defaultExtension: 'js',
     main: 'ng2-bootstrap.js'
+  },
+  rxjs: {
+    main: 'Rx.js'
   }
 };
 
