@@ -1,10 +1,10 @@
-import { TestmePage } from './app.po';
+import { NcRedistrictingPage } from './app.po';
 
-describe('testme App', function() {
-  let page: TestmePage;
+describe('nc-redistricting App', function() {
+  let page: NcRedistrictingPage;
 
   beforeEach(() => {
-    page = new TestmePage();
+    page = new NcRedistrictingPage();
   });
 
   it('should display message saying app works', () => {

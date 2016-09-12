@@ -9,8 +9,8 @@ import * as topojson from 'topojson';
   selector: 'app-root',
   // TODO the styles defined in the component aren't taking, I just stuck a copy
   // in index.css for the moment.
-  styleUrls: [ 'app/design.component.css' ],
-	templateUrl: 'app/design.component.html'
+  styleUrls: [ 'design.component.css' ],
+	templateUrl: 'design.component.html'
 })
 
 export class DesignComponent {
@@ -54,7 +54,7 @@ export class DesignComponent {
     d3.select(window)
       .on('resize', onSizeChange);
 
-    d3.json("/boundaries.topojson", (err, nc) => {
+    d3.json("/assets/boundaries.topojson", (err, nc) => {
       if (err) { return console.log(err); }
 
       let boundaries = topojson.feature(nc, nc.objects.nc);

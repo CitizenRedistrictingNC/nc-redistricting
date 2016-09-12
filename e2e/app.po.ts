@@ -1,4 +1,6 @@
-export class TestmePage {
+import { browser, element, by } from 'protractor/globals';
+
+export class NcRedistrictingPage {
   navigateTo() {
     return browser.get('/');
   }
