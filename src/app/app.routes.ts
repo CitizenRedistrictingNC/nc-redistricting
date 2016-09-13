@@ -1,14 +1,14 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { AuthGuard } from './auth-guard.service';
 import { DesignComponent } from './design.component';
 import { HomeComponent } from './home.component';
+import { PageNotFoundComponent } from './page.not.found.component';
 import { PersonalRankingsComponent } from './personal.rankings.component';
 import { RankingsComponent } from './rankings.component';
 import { ScoreComponent } from './score.component';
-import { PageNotFoundComponent } from './page.not.found.component';
 
-export const routes: RouterConfig = [
+export const routes: Routes = [
   { path: 'design',
     component: DesignComponent,
     canActivate: [AuthGuard]

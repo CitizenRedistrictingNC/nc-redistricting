@@ -25,8 +25,11 @@ const firebaseAuthConfig = {
   method: AuthMethods.Popup
 };
 
+let r = routes.map((d) => d.component) as any[];
+r.push(AppComponent);
+
 @NgModule({
-  declarations: [ AppComponent ],
+  declarations: r,
   imports: [
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
