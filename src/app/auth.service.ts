@@ -14,11 +14,16 @@ export enum AuthState {
 
 @Injectable()
 export class AuthService {
-  username: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   auth: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  // When a successful login occurs, redirect to this URL (and reset it to null).
+  redirectTo: string;
+
+  // When equal to IN, auth and username are both populated with the current
+  // user.
   state: BehaviorSubject<AuthState> = new BehaviorSubject<AuthState>(AuthState.NotInitialized);
 
-  redirectTo: string;
+  username: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private af: AngularFire, private router: Router) {
     this.af.auth.subscribe((auth) => {

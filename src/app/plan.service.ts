@@ -12,7 +12,7 @@ import {
 
 @Injectable()
 export class PlanService {
-  constructor(private af: AngularFire, private as: AuthService) { }
+  constructor(private af: AngularFire, private authService: AuthService) { }
 
   getTopPlans(): FirebaseListObservable<any> {
     // TODO this just fetchis 10 designs, since they're all unscored. When
@@ -26,7 +26,7 @@ export class PlanService {
 
   getUserPlans(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.as.auth.subscribe(auth => {
+      this.authService.auth.subscribe(auth => {
         if (!auth) {
           reject(new Error('Not logged in!'));
           return;
@@ -47,7 +47,7 @@ export class PlanService {
 
   submitPlan(plan: Plan): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      this.as.auth.subscribe(auth => {
+      this.authService.auth.take(1).subscribe(auth => {
         if (!auth) {
           reject(new Error('Not logged in!'));
           return;
