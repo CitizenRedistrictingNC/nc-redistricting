@@ -25,7 +25,8 @@ const firebaseAuthConfig = {
   method: AuthMethods.Popup
 };
 
-let r = routes.map((d) => d.component) as any[];
+var r = [];
+r = routes.map((d) => d.component) as any[];
 r.push(AppComponent);
 
 @NgModule({
