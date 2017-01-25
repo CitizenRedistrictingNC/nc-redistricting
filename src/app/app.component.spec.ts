@@ -10,6 +10,7 @@ describe('App: NcRedistricting', () => {
         AppComponent
       ],
     });
+    TestBed.compileComponents();
   });
 
   it('should create the app', async(() => {
