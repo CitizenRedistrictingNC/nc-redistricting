@@ -11,19 +11,23 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return new Promise((fulfill, reject) => {
-      this.as.state.take(1).subscribe((as) => {
-        if (as == AuthState.NotInitialized) {
-          return;
-        }
+      this.as.state
+        .filter(x => { return x != AuthState.NotInitialized })
+        .take(1)
+        .subscribe((as) => {
+          console.log(as);
+          if (as == AuthState.In) {
+            return fulfill(true);
+          }
 
-        if (as == AuthState.In) {
-          return fulfill(true);
-        }
-
-        this.as.redirectTo = state.url;
-        this.as.login();
-        fulfill(false);
-      });
+          if (route.component.hasOwnProperty('isError')) {
+            this.as.redirectTo = '';
+          } else {
+            this.as.redirectTo = state.url;
+          }
+          this.as.login();
+          fulfill(false);
+        });
     });
   }
 }

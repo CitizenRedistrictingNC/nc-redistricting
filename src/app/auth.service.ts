@@ -42,6 +42,8 @@ export class AuthService {
           if (this.redirectTo) {
             this.router.navigate([this.redirectTo]);
             this.redirectTo = null;
+          } else {
+            this.router.navigate(['']);
           }
           break;
         default:
@@ -52,7 +54,10 @@ export class AuthService {
   }
 
   login() {
-    this.af.auth.login();
+    this.af.auth.login()
+      .catch((err) => {
+        this.router.navigate(['login-error']);
+      });
   }
 
   logout() {
