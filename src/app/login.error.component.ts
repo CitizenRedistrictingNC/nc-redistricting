@@ -17,6 +17,4 @@ import { Component } from '@angular/core';
   `
 })
 
-export class LoginErrorComponent {
-  isError = true;
-}
+export class LoginErrorComponent { }

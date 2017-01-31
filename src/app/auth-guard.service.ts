@@ -15,16 +15,11 @@ export class AuthGuard implements CanActivate {
         .filter(x => { return x != AuthState.NotInitialized })
         .take(1)
         .subscribe((as) => {
-          console.log(as);
           if (as == AuthState.In) {
             return fulfill(true);
           }
 
-          if (route.component.hasOwnProperty('isError')) {
-            this.as.redirectTo = '';
-          } else {
-            this.as.redirectTo = state.url;
-          }
+          this.as.redirectTo = state.url;
           this.as.login();
           fulfill(false);
         });
